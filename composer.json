@@ -1,0 +1,9 @@
+{
+    "name": "superv/nginx-agent",
+    "type": "superv-droplet",
+    "autoload": {
+        "psr-4": {
+            "SuperV\\Agents\\Nginx\\": "src/"
+        }
+    }
+}
