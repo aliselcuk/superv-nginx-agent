@@ -67,7 +67,9 @@ class MakeNginxSite extends Job
         $this->server->mkdir($site->sessionDir(), 700);
 
         // geneate sample index.php
-        $this->server->saveToFile("<?php echo 'welcome to site: {$site->hostname()}'; \r\n phpinfo(); ", $site->webroot().'/index.php');
+        if (!$this->server->fileExists($site->webroot().'/index.php')) {
+            $this->server->saveToFile("<?php echo 'welcome to site: {$site->hostname()}'; \r\n phpinfo(); ", $site->webroot().'/index.php');
+        }
 
         $this->server->chownR($user->home(), $user->username());
 
