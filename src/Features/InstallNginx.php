@@ -68,6 +68,8 @@ class InstallNginx extends AgentFeature
 
         $this->job('Install SuperV', 'php /usr/local/superv/app/artisan superv:install');
 
+        $this->job('Set ACP Hostname', "php /usr/local/superv/app/artisan env:set SUPERV_PORTS_ACP_HOSTNAME=acp.superv.io");
+
         // site
         $username = 'superv';
         $config = new SiteConfig(
