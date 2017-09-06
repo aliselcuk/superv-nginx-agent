@@ -79,8 +79,12 @@ class InstallNginx extends AgentFeature
         $config->setWebroot("/usr/local/superv/app/public")->setLogsDir("/usr/local/superv/app/_logs");
         $this->job('Create SuperV WebSite!', new MakeNginxSite($this->server, $config));
 
+        $this->job('Link ACP Port Public', 'cd /usr/local/superv/app; mkdir public/ports; ln -s /usr/local/superv/app/droplets/superv/ports/acp/public /usr/local/superv/app/public/ports/acp');
+        $this->job('Install NPM Packages', 'cd /usr/local/superv/app; npm install --production --unsafe-perm');
+
         $this->job('Install Supervisor', 'apt-get install -y supervisor');
         $this->job('Start Supervisor', 'service supervisor start');
+
 
         return $this->jobs;
     }
