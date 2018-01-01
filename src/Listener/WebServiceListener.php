@@ -4,7 +4,7 @@ namespace SuperV\Agents\Nginx\Listener;
 
 use SuperV\Agents\Nginx\NginxAgent;
 use SuperV\Modules\Hosting\Domains\Services\Web\Model\WebServiceModel;
-use SuperV\Platform\Domains\Droplet\Droplet;
+use SuperV\Platform\Domains\Droplet\DropletFactory;
 use SuperV\Platform\Domains\Event\Listener;
 use SuperV\Platform\Domains\Task\Jobs\DeployTask;
 use SuperV\Platform\Domains\Task\TaskBuilder;
@@ -14,10 +14,11 @@ class WebServiceListener extends Listener
     public function created(WebServiceModel $model)
     {
         echo '........WebServiceListener.........';
-        $agent = Droplet::from($model->getPart()->getDrop()->getAgent());
+        $agent = app(DropletFactory::class)->create($model->getPart()->getDrop()->getAgent());
 
         if (! $agent instanceof NginxAgent) {
             echo 'not';
+
             return;
         }
 
