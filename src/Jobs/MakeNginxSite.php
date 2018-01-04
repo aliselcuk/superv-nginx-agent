@@ -4,13 +4,13 @@ namespace SuperV\Agents\Nginx\Jobs;
 
 use Illuminate\Config\Repository;
 use SuperV\Agents\Nginx\Domains\Site\SiteConfig;
-use SuperV\Modules\Supreme\Domains\Server\Server;
+use SuperV\Modules\Supreme\Domains\Server\Terminal;
 use SuperV\Platform\Domains\Task\Job;
 
 class MakeNginxSite extends Job
 {
     /**
-     * @var Server
+     * @var Terminal
      */
     private $server;
 
@@ -19,7 +19,7 @@ class MakeNginxSite extends Job
      */
     private $siteConfig;
 
-    public function __construct(Server $server, SiteConfig $siteConfig)
+    public function __construct(Terminal $server, SiteConfig $siteConfig)
     {
         $this->server = $server;
         $this->siteConfig = $siteConfig;
